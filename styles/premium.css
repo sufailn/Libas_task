@@ -1,0 +1,118 @@
+/* ---------------------------
+   Luxury Base & Typography
+--------------------------- */
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+:root{
+  --text:#111111;
+  --muted:#6b7280;
+  --border:#eaeaea;
+  --serif: var(--font-cormorant), ui-serif, Georgia, "Times New Roman", serif;
+  --sans: var(--font-inter), system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans";
+  --wrap: 1280px;
+}
+html{ -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+body{ color:var(--text); background:#fff; font-family:var(--sans); line-height:1.5; }
+
+/* Normalize heading sizes to avoid Tailwind/Bootstrap conflicts */
+h1,h2,h3,h4{ font-family:var(--serif); font-weight:700; letter-spacing:.01em; line-height:1.1; margin:0 0 .5rem; }
+h1{ font-size:clamp(28px,3.2vw,40px); }
+h2{ font-size:clamp(22px,2.6vw,32px); }
+h3{ font-size:clamp(18px,2.1vw,26px); }
+
+.lux-h2{ font-family:var(--serif); font-weight:800; letter-spacing:.02em; font-size:clamp(22px,2.5vw,30px); }
+.lux-muted{ color:var(--muted); }
+
+/* Brand serif utility to use our imported Cormorant easily with Tailwind */
+.font-brand-serif{ font-family: var(--serif); }
+
+/* Softer secondary text */
+.text-dim{ color: color-mix(in srgb, var(--muted) 88%, #000 0%); }
+
+/* ---------------------------
+   Header (Luxury)
+--------------------------- */
+.nav-lux-wrapper{
+  position:sticky; top:0; z-index:1050;
+  background:#fff; border-bottom:1px solid var(--border);
+  transition: box-shadow .18s ease, min-height .18s ease;
+}
+.nav-lux-wrapper.is-scrolled{ box-shadow:0 6px 18px rgba(0,0,0,.06); }
+.nav-lux{ display:grid; grid-template-columns:42px 1fr auto; align-items:center; gap:12px; min-height:88px; }
+.nav-lux-wrapper.is-scrolled .nav-lux{ min-height:68px; }
+.brand-wordmark{ font-family:var(--serif); letter-spacing:.28em; font-weight:700; font-size:clamp(18px,3vw,24px); color:var(--text); text-decoration:none; line-height:1; }
+.nav-lux-center{ display:flex; justify-content:center; }
+.nav-lux-right{ display:inline-flex; align-items:center; gap:8px; }
+.icon-btn{ display:inline-flex; align-items:center; justify-content:center; width:36px; height:36px; border-radius:999px; border:1px solid var(--border); background:#fff; color:var(--text); transition: background .12s ease; }
+.icon-btn:hover{ background:#f7f7f7; }
+.count-pill{ position:absolute; top:-6px; right:-6px; background:#111; color:#fff; border-radius:999px; font-size:11px; padding:3px 6px; line-height:1; }
+.nav-lux-searchbar{ border-top:1px solid var(--border); background:#fff; }
+.nav-lux-search{ display:flex; align-items:center; gap:10px; padding:10px 0; }
+.nav-lux-input{ border:1px solid var(--border); border-radius:999px; padding:8px 12px; width:min(520px,100%); }
+.nav-lux-mobile{ padding:10px 0 16px; border-top:1px solid var(--border); background:#fff; }
+.nav-lux-links{ display:grid; gap:8px; }
+.nav-lux-links a{ color:var(--text); text-decoration:none; }
+.nav-lux-links a:hover{ text-decoration:underline; }
+
+/* ---------------------------
+   Scroll Zoom (Editorial)
+--------------------------- */
+.scroll-zoom-section{ position:relative; min-height:clamp(420px,72vh,840px); overflow:clip; }
+.szs-media{ position:absolute; inset:0; will-change:transform; transition: transform .22s ease-out; }
+.szs-scrim{ position:absolute; inset:0; background:linear-gradient(180deg, rgba(0,0,0,.15) 0%, rgba(0,0,0,.25) 40%, rgba(0,0,0,.30) 100%); pointer-events:none; }
+.szs-content{ position:relative; z-index:1; padding:clamp(24px,8vw,80px); max-width:var(--wrap); margin:0 auto; color:#fff; }
+.szs-content.is-left{ text-align:left; }
+.szs-content.is-right{ text-align:right; }
+.szs-content.is-center{ text-align:center; }
+.lux-hero-title{ font-family:var(--serif); font-weight:700; letter-spacing:.02em; font-size:clamp(28px,3.2vw,44px); text-shadow:0 2px 14px rgba(0,0,0,.25); margin:0; }
+.lux-hero-sub{ color:rgba(255,255,255,.88); font-size:clamp(14px,1.4vw,18px); margin:.5rem 0 0; text-shadow:0 1px 10px rgba(0,0,0,.2); }
+
+/* ---------------------------
+   Privileges (Footer-style band)
+--------------------------- */
+.footer-lux{ background:#fff; }
+.footer-band{ height:16px; background:#f7f6f2; border-top:1px solid #eee; border-bottom:1px solid #eee; }
+.privileges-row{ display:grid; grid-template-columns:1fr; gap:10px; padding:18px 0; border:1px solid #eee; border-radius:12px; margin-top:18px; }
+@media (min-width:768px){ .privileges-row{ grid-template-columns:repeat(3,1fr); } }
+.priv-item{ padding:12px 14px; border-bottom:1px solid #eee; }
+.priv-item:nth-child(3n){ border-bottom:none; }
+@media (min-width:768px){ .priv-item{ border-right:1px solid #eee; border-bottom:none; } .priv-item:last-child{ border-right:none; } }
+.priv-head{ display:flex; justify-content:space-between; align-items:center; font-weight:700; }
+.chev{ font-size:18px; color:#999; }
+.priv-sub{ color:var(--muted); font-size:.95rem; }
+
+/* ---------------------------
+   Footer Links
+--------------------------- */
+.footer-links .footer-col{ margin-top:18px; }
+.footer-col-title{ font-family:var(--serif); font-weight:800; margin-bottom:8px; letter-spacing:.02em; }
+.footer-col ul{ list-style:none; padding:0; margin:0; }
+.footer-col li{ margin:6px 0; }
+.footer-col a{ color:var(--text); text-decoration:none; }
+.footer-col a:hover{ text-decoration:underline; }
+.back-to-top{ position:fixed; right:12px; bottom:12px; z-index:1050; display:inline-flex; align-items:center; justify-content:center; width:42px; height:42px; border-radius:999px; border:1px solid var(--border); background:#fff; color:var(--text); text-decoration:none; font-weight:700; }
+.back-to-top:hover{ background:#f7f7f7; }
+
+/* ---------------------------
+   Product Cards (kept, refined)
+--------------------------- */
+.pcard{ position:relative; display:flex; flex-direction:column; height:100%; border:1px solid #eee; border-radius:18px; overflow:hidden; background:#fff; transition: transform .14s ease, box-shadow .14s ease, border-color .14s ease; box-shadow:0 6px 18px rgba(0,0,0,.04); }
+.pcard:hover{ transform:translateY(-3px); box-shadow:0 16px 36px rgba(0,0,0,.10); border-color:#e8e8e8; }
+.pcard-media{ position:relative; display:block; aspect-ratio:1/1; overflow:hidden; }
+.pcard-media img,.pcard-media span,.pcard-media picture{ transition: transform .22s ease-in-out; transform-origin:center; }
+.pcard:hover .pcard-media img{ transform:scale(1.07); }
+.pcard-badge{ position:absolute; top:10px; left:10px; z-index:1; backdrop-filter:blur(6px); background:rgba(255,255,255,.9); border:1px solid rgba(0,0,0,.06); border-radius:999px; padding:4px 10px; font-size:12px; font-weight:700; color:#111; }
+.pcard-body{ padding:14px 14px 0; }
+.pcard-meta{ display:flex; align-items:center; gap:8px; color:var(--muted); font-size:12px; text-transform:uppercase; letter-spacing:.04em; }
+.pcard-kicker{ white-space:nowrap; }
+.pcard-dot{ width:3px; height:3px; border-radius:999px; background:#cbd5e1; display:inline-block; }
+.pcard-title{ display:inline-block; margin-top:6px; color:#111; text-decoration:none; font-weight:800; font-family:var(--serif); }
+.pcard-title:hover{ text-decoration:underline; }
+.pcard-desc{ color:var(--muted); font-size:.925rem; margin:6px 0 0 0; }
+.pcard-footer{ display:flex; align-items:center; justify-content:space-between; padding:12px 14px 16px; gap:10px; }
+.pcard-price{ font-weight:800; letter-spacing:.02em; }
+.pcard-actions{ display:inline-flex; gap:8px; transform:translateY(6px); opacity:0; transition: opacity .14s ease, transform .14s ease; }
+.pcard:hover .pcard-actions{ transform:translateY(0); opacity:1; }
+
+/* Cart drawer close button stacking fix */
+.offcanvas-backdrop .btn[aria-label="Close cart"]{ position:relative; z-index:1; }
