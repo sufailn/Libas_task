@@ -55,7 +55,7 @@ export default async function HomePage() {
         </div>
         <FeaturedProductsCarousel products={products} />
    
-        
+                
       </section>
     </>
   )
