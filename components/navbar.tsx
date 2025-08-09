@@ -111,15 +111,11 @@ export function Navbar() {
               <Link href="/products?dept=Beauty" onClick={() => setMobileOpen(false)}>
                 Beauty
               </Link>
-              <Link href="/products?audience=Men" onClick={() => setMobileOpen(false)}>
-                Men
-              </Link>
+              {/* Removed Men link */}
               <Link href="/products?audience=Women" onClick={() => setMobileOpen(false)}>
                 Women
               </Link>
-              <Link href="/products?audience=Kids" onClick={() => setMobileOpen(false)}>
-                Kids
-              </Link>
+              {/* Removed Kids link */}
               <Link href="/products" onClick={() => setMobileOpen(false)}>
                 All Products
               </Link>

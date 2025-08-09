@@ -4,10 +4,11 @@ import Image from "next/image"
 import { useEffect, useRef } from "react"
 import { X } from 'lucide-react'
 import { useCart } from "@/hooks/use-cart"
+import { CartItemEditor } from "./CartItemEditor"
 import { formatCurrency } from "@/lib/currency"
 
 export function CartDrawer({ open, onClose }: { open: boolean; onClose: () => void }) {
-  const { items, total, remove, clear } = useCart()
+  const { items, total, remove, clear, add } = useCart()
   const closeBtnRef = useRef<HTMLButtonElement>(null)
 
   // Close on ESC and lock scroll when open
@@ -102,7 +103,14 @@ export function CartDrawer({ open, onClose }: { open: boolean; onClose: () => vo
                   </div>
                   <div className="flex-grow-1">
                     <div className="fw-semibold">{it.name}</div>
-                    <div className="text-muted small">Qty: {it.quantity}</div>
+                    <CartItemEditor
+                      item={{ size: it.size, quantity: it.quantity, sizes: ["XS","S","M","L","XL"] }}
+                      onUpdate={({ size, quantity }) => {
+                        remove(it.id)
+                        // Use add with minimal Product fields
+                        add({ id: it.id, name: it.name, price: it.price, image: it.image, slug: "", description: "", dept: "Fashion", category: "Clothing", audience: "Women" }, quantity, size)
+                      }}
+                    />
                   </div>
                   <div className="text-nowrap fw-semibold">{formatCurrency(it.price * it.quantity)}</div>
                   <button className="btn btn-sm btn-outline-danger" type="button" onClick={() => remove(it.id)}>

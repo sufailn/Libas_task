@@ -163,3 +163,5 @@ export function ProductGrid({ products = [], initial = {} }: Props) {
     </>
   )
 }
+
+

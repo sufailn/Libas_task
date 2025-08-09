@@ -4,12 +4,13 @@ import { createContext, useCallback, useContext, useEffect, useMemo, useState } 
 import type { Product } from "@/lib/data/mock-products"
 
 export type CartItem = {
+  variant: string
   id: string
   name: string
   price: number
   image: string
   quantity: number
-  variant?: string
+  size?: string
 }
 
 type CartState = {
@@ -20,7 +21,7 @@ type CartContextType = {
   items: CartItem[]
   count: number
   total: number
-  add: (p: Product, quantity?: number) => void
+  add: (p: Product, quantity?: number, size?: string) => void
   remove: (id: string) => void
   clear: () => void
 }
@@ -51,9 +52,11 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
     }
   }, [state])
 
-  const add = useCallback((p: Product, quantity = 1) => {
+  const add = useCallback((p: Product, quantity = 1, size?: string) => {
     setState((prev) => {
-      const idx = prev.items.findIndex((i) => i.id === p.id)
+      // For size-based products, treat each size as a unique cart item
+      const key = size ? `${p.id}-${size}` : p.id
+      const idx = prev.items.findIndex((i) => (size ? `${i.id}-${i.size}` : i.id) === key)
       const items = [...prev.items]
       if (idx >= 0) {
         items[idx] = { ...items[idx], quantity: items[idx].quantity + quantity }
@@ -64,6 +67,8 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
           price: p.price,
           image: p.image,
           quantity,
+          size,
+          variant: ""
         })
       }
       return { items }
