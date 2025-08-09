@@ -75,15 +75,15 @@ export function ProductCard({ product }: { product: Product }) {
         {/* Actions */}
   <div className="flex gap-2 mt-auto pt-3 border-t border-zinc-200">
           {/* Hide Add to Cart on mobile if inside carousel (use .hide-add-cart-mobile class) */}
-          <button
+          {/* <button
             className="btn btn-dark flex-1 text-sm font-semibold rounded-lg py-2 shadow hover:bg-zinc-800 transition-colors hidden sm:block"
             type="button"
             onClick={() => setShowAddToCart(true)}
           >
             Add to Cart
-          </button>
+          </button> */}
           <button
-            className="flex-1 border border-zinc-300 rounded-lg text-sm font-medium text-zinc-700 hover:bg-zinc-50 text-center py-2 transition-colors shadow-sm"
+            className="flex-1 btn btn-dark border border-zinc-300 rounded-lg text-sm font-medium text-zinc-700 hover:bg-zinc-50 text-center py-2 transition-colors shadow-sm"
             type="button"
             onClick={() => router.push(`/orderpage?product=${product.slug}`)}
           >
