@@ -1,30 +1,45 @@
-import { getAllProducts } from "@/lib/data/mock-products"
-import { siteConfig, productUrl } from "@/lib/seo"
+// app/sitemap.ts
+import { getAllProducts } from "@/lib/data/mock-products";
+import { siteConfig, productUrl, categoryUrl } from "@/lib/seo";
+import type { MetadataRoute } from "next";
 
-export default async function sitemap() {
-  const products = await getAllProducts()
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
+  const products = await getAllProducts();
 
-  const staticRoutes = [
+  // Unique categories from all products
+  const categories = Array.from(new Set(products.map((p) => p.category)));
+
+  // Static core pages
+  const staticRoutes: MetadataRoute.Sitemap = [
     {
       url: `${siteConfig.siteUrl}/`,
-      lastModified: new Date().toISOString(),
+      lastModified: new Date(),
       changeFrequency: "weekly",
       priority: 1.0,
     },
     {
       url: `${siteConfig.siteUrl}/products`,
-      lastModified: new Date().toISOString(),
+      lastModified: new Date(),
       changeFrequency: "daily",
       priority: 0.9,
     },
-  ]
+  ];
 
-  const productRoutes = products.map((p) => ({
+  // Category pages
+  const categoryRoutes: MetadataRoute.Sitemap = categories.map((cat) => ({
+    url: categoryUrl(cat),
+    lastModified: new Date(),
+    changeFrequency: "weekly",
+    priority: 0.7,
+  }));
+
+  // Product detail pages
+  const productRoutes: MetadataRoute.Sitemap = products.map((p) => ({
     url: productUrl(p.slug),
-    lastModified: new Date().toISOString(),
+    lastModified: new Date(),
     changeFrequency: "weekly",
     priority: 0.8,
-  }))
+  }));
 
-  return [...staticRoutes, ...productRoutes]
+  return [...staticRoutes, ...categoryRoutes, ...productRoutes];
 }
